@@ -1,9 +1,10 @@
+using _Project.Core.Scripts;
 using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
 namespace _Project.Scripts
 {
-    public class FirstScreenView : MonoBehaviour
+    public class FirstScreenView : BaseUIScreenView
     {
         [SerializeField] private Slider _slider;
         [SerializeField] private GameObject _payButton;
