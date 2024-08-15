@@ -1,4 +1,6 @@
 using _Project.Core.Scripts;
+using _Project.Core.Scripts.Enums;
+using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
@@ -25,6 +27,7 @@ namespace _Project.Scripts
         public void OnClickToWin()
         {
             Debug.Log("Open steam api");
+            UIManager.Instance.OpenUI(UIScreenKeys.MessagePopupScreen).Forget();
         }
     }
 }

@@ -1,14 +1,12 @@
-using _Project.Core.Scripts;
+﻿using _Project.Core.Scripts;
 using _Project.Core.Scripts.Enums;
 using Cysharp.Threading.Tasks;
-using UnityEngine;
 namespace _Project.Scripts
 {
-    public class GameManager : MonoBehaviour
+    public class MessagePopupScreenView : BaseUIScreenView
     {
-        private void Start()
+        public void OnClickPayButton()
         {
-            UIManager.Instance.Init();
             UIManager.Instance.OpenUI(UIScreenKeys.FirstScreen).Forget();
         }
     }

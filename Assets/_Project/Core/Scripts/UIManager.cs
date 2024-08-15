@@ -18,11 +18,7 @@ namespace _Project.Core.Scripts
         private Dictionary<string, GameObject> uiElements = new Dictionary<string, GameObject>();
 
 
-        private void Awake()
-        {
-            Init();
-        }
-        private void Init()
+        public void Init()
         {
             UILayers = uiLayersList.ToDictionary(x => x.GetComponent<UILayer>().Key, x => x.transform);
         }
@@ -36,24 +32,27 @@ namespace _Project.Core.Scripts
 
             try
             {
+                // Prefab'ı yükle
                 var handle = Addressables.LoadAssetAsync<GameObject>(prefabName);
                 GameObject uiPrefab = await handle.Task;
 
                 if (uiPrefab != null)
                 {
-                    uiElements[prefabName] = uiPrefab;
+                    // Instantiate et ve referansı dictionary'e ekle
+                    GameObject uiInstance = Instantiate(uiPrefab);
+                    uiElements[prefabName] = uiInstance;
+
                     Debug.Log($"UI Element {prefabName} initialized successfully.");
 
-
-                    var baseUIScreenView = uiPrefab.GetComponent<BaseUIScreenView>();
+                    var baseUIScreenView = uiInstance.GetComponent<BaseUIScreenView>();
 
                     if (UILayers.TryGetValue(baseUIScreenView.UILayerKey, out Transform layerTransform))
                     {
-                        uiPrefab.transform.SetParent(layerTransform);
-                        uiPrefab.transform.localPosition = Vector3.zero;
+                        uiInstance.transform.SetParent(layerTransform, false);
+                        uiInstance.transform.localPosition = Vector3.zero;
                     }
 
-                    return uiPrefab;
+                    return uiInstance;
                 }
                 else
                 {
@@ -67,6 +66,7 @@ namespace _Project.Core.Scripts
                 return null;
             }
         }
+
 
         // Method to open the UI
         public async UniTask<GameObject> OpenUI(string uiName)
