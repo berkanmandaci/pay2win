@@ -7,7 +7,7 @@ namespace _Project.Scripts
     {
         public void OnClickPayButton()
         {
-            UIManager.Instance.OpenUI(UIScreenKeys.FirstScreen).Forget();
+            UIManager.Instance.OpenUI(UIScreenKeys.WinMessagePopupScreen).Forget();
         }
     }
 }

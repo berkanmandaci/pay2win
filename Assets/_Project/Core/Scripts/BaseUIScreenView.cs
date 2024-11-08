@@ -5,5 +5,6 @@ namespace _Project.Core.Scripts
     public class BaseUIScreenView : MonoBehaviour
     {
         public UILayerKey UILayerKey;
+        public string AddressableKey;
     }
 }
